@@ -46,7 +46,7 @@ pub fn iteration_times(
         .configure_mesh()
         .y_desc(format!("Average Iteration Time ({})", unit))
         .x_label_formatter(&|x| pretty_print_float(*x, true))
-        .light_line_style(&TRANSPARENT)
+        .light_line_style(TRANSPARENT)
         .draw()
         .unwrap();
 

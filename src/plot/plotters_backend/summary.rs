@@ -87,7 +87,7 @@ fn draw_line_comparison_figure<XR: AsRangedCoord<Value = f64>, YR: AsRangedCoord
             )
             .unwrap();
         if let Some(name) = name {
-            let name: &str = *name;
+            let name: &str = name;
             series.label(name).legend(move |(x, y)| {
                 Rectangle::new(
                     [(x, y - 5), (x + 20, y + 5)],
@@ -168,7 +168,7 @@ fn draw_violin_figure<XR: AsRangedCoord<Value = f64>, YR: AsRangedCoord<Value = 
             .draw_series(AreaSeries::new(
                 curve.to_points().map(|(x, y)| (x, base + y / 2.0)),
                 base,
-                &colors.current_sample,
+                colors.current_sample,
             ))
             .unwrap();
 
@@ -176,7 +176,7 @@ fn draw_violin_figure<XR: AsRangedCoord<Value = f64>, YR: AsRangedCoord<Value = 
             .draw_series(AreaSeries::new(
                 curve.to_points().map(|(x, y)| (x, base - y / 2.0)),
                 base,
-                &colors.current_sample,
+                colors.current_sample,
             ))
             .unwrap();
     }

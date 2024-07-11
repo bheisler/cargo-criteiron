@@ -487,7 +487,7 @@ impl Report for Html {
 
                 self.generate_summary(
                     &subgroup_id,
-                    &*samples_with_function,
+                    &samples_with_function,
                     context,
                     formatter,
                     false,
@@ -509,7 +509,7 @@ impl Report for Html {
 
                 self.generate_summary(
                     &subgroup_id,
-                    &*samples_with_value,
+                    &samples_with_value,
                     context,
                     formatter,
                     false,
@@ -521,7 +521,7 @@ impl Report for Html {
 
         self.generate_summary(
             &BenchmarkId::new(group_id.to_owned(), None, None, None),
-            &*(all_data),
+            &(all_data),
             context,
             formatter,
             true,

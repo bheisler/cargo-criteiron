@@ -76,18 +76,18 @@ pub fn pdf_full(
     chart
         .draw_series(std::iter::once(PathElement::new(
             mean.to_line_vec(max_iters),
-            &colors.not_an_outlier,
+            colors.not_an_outlier,
         )))
         .unwrap()
         .label("Mean")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &colors.not_an_outlier));
+        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], colors.not_an_outlier));
 
     chart
         .draw_series(vec![
-            PathElement::new(low_mild.to_line_vec(max_iters), &colors.mild_outlier),
-            PathElement::new(high_mild.to_line_vec(max_iters), &colors.mild_outlier),
-            PathElement::new(low_severe.to_line_vec(max_iters), &colors.severe_outlier),
-            PathElement::new(high_severe.to_line_vec(max_iters), &colors.severe_outlier),
+            PathElement::new(low_mild.to_line_vec(max_iters), colors.mild_outlier),
+            PathElement::new(high_mild.to_line_vec(max_iters), colors.mild_outlier),
+            PathElement::new(low_severe.to_line_vec(max_iters), colors.severe_outlier),
+            PathElement::new(high_severe.to_line_vec(max_iters), colors.severe_outlier),
         ])
         .unwrap();
 
@@ -241,7 +241,7 @@ pub fn pdf_comparison(
         )))
         .unwrap()
         .label("Base Mean")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &colors.previous_sample));
+        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], colors.previous_sample));
 
     chart
         .draw_series(std::iter::once(PathElement::new(
@@ -250,7 +250,7 @@ pub fn pdf_comparison(
         )))
         .unwrap()
         .label("New Mean")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &colors.current_sample));
+        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], colors.current_sample));
 
     if !is_thumbnail {
         chart.configure_series_labels().draw().unwrap();

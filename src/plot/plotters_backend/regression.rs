@@ -41,7 +41,7 @@ pub fn regression(
         .x_desc(x_label)
         .y_desc(format!("Total sample time ({})", unit))
         .x_label_formatter(&|x| pretty_print_float(x * x_scale, true))
-        .light_line_style(&TRANSPARENT)
+        .light_line_style(TRANSPARENT)
         .draw()
         .unwrap();
 
@@ -57,7 +57,7 @@ pub fn regression(
     chart
         .draw_series(std::iter::once(PathElement::new(
             regression.to_line_vec(),
-            &colors.current_sample,
+            colors.current_sample,
         )))
         .unwrap()
         .label("Linear regression")
@@ -130,13 +130,13 @@ pub fn regression_comparison(
         .x_desc(x_label)
         .y_desc(format!("Total sample time ({})", unit))
         .x_label_formatter(&|x| pretty_print_float(x * x_scale, true))
-        .light_line_style(&TRANSPARENT)
+        .light_line_style(TRANSPARENT)
         .draw()
         .unwrap();
 
     chart
         .draw_series(vec![
-            PathElement::new(base_regression.to_line_vec(), &colors.previous_sample).into_dyn(),
+            PathElement::new(base_regression.to_line_vec(), colors.previous_sample).into_dyn(),
             Polygon::new(
                 vec![
                     (
@@ -167,7 +167,7 @@ pub fn regression_comparison(
 
     chart
         .draw_series(vec![
-            PathElement::new(current_regression.to_line_vec(), &colors.current_sample).into_dyn(),
+            PathElement::new(current_regression.to_line_vec(), colors.current_sample).into_dyn(),
             Polygon::new(
                 vec![
                     (

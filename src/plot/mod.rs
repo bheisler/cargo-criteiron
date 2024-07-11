@@ -431,8 +431,8 @@ impl<B: PlottingBackend> PlotGenerator<B> {
         let len = end - start;
 
         let distribution_curve = LineCurve {
-            xs: &*kde_xs,
-            ys: &*ys,
+            xs: &kde_xs,
+            ys: &ys,
         };
         let bootstrap_area = FilledCurve {
             xs: &kde_xs[start..end],
@@ -519,7 +519,7 @@ impl<B: PlottingBackend> PlotGenerator<B> {
             )
         };
 
-        let distribution_curve = LineCurve { xs: &*xs, ys: &*ys };
+        let distribution_curve = LineCurve { xs: &xs, ys: &ys };
         let confidence_interval = FilledCurve {
             xs: &xs[start..end],
             ys_1: &ys[start..end],
@@ -824,8 +824,8 @@ impl<B: PlottingBackend> PlotGenerator<B> {
         let [lost, lomt, himt, hist] = fences;
 
         let pdf = FilledCurve {
-            xs: &*xs,
-            ys_1: &*ys,
+            xs: &xs,
+            ys_1: &ys,
             ys_2: &vec![0.0; ys.len()],
         };
         let mean = VerticalLine { x: mean };
@@ -920,8 +920,8 @@ impl<B: PlottingBackend> PlotGenerator<B> {
             end: Point { x: mean, y: mean_y },
         };
         let pdf = FilledCurve {
-            xs: &*xs,
-            ys_1: &*ys,
+            xs: &xs,
+            ys_1: &ys,
             ys_2: &vec![0.0; ys.len()],
         };
 
@@ -970,8 +970,8 @@ impl<B: PlottingBackend> PlotGenerator<B> {
             },
         };
         let base_pdf = FilledCurve {
-            xs: &*base_xs,
-            ys_1: &*base_ys,
+            xs: &base_xs,
+            ys_1: &base_ys,
             ys_2: &vec![0.0; base_ys.len()],
         };
 
@@ -986,8 +986,8 @@ impl<B: PlottingBackend> PlotGenerator<B> {
             },
         };
         let current_pdf = FilledCurve {
-            xs: &*xs,
-            ys_1: &*ys,
+            xs: &xs,
+            ys_1: &ys,
             ys_2: &vec![0.0; base_ys.len()],
         };
 
@@ -1015,8 +1015,8 @@ impl<B: PlottingBackend> PlotGenerator<B> {
 
         let t = VerticalLine { x: t };
         let t_distribution = FilledCurve {
-            xs: &*xs,
-            ys_1: &*ys,
+            xs: &xs,
+            ys_1: &ys,
             ys_2: &vec![0.0; ys.len()],
         };
 
@@ -1272,7 +1272,7 @@ impl<B: PlottingBackend> Plotter for PlotGenerator<B> {
     }
 
     fn rel_distributions(&mut self, ctx: PlotContext<'_>, comparison: &ComparisonData) {
-        crate::plot::CHANGE_STATS.iter().for_each(|&statistic| {
+        CHANGE_STATS.iter().for_each(|&statistic| {
             self.rel_distribution(
                 ctx.id,
                 ctx.context,
@@ -1295,7 +1295,7 @@ impl<B: PlottingBackend> Plotter for PlotGenerator<B> {
         let max = all_curves
             .iter()
             .map(|(_, bench)| bench.latest_stats.estimates.typical().point_estimate)
-            .fold(::std::f64::NAN, f64::max);
+            .fold(f64::NAN, f64::max);
 
         let mut dummy = [1.0];
         let unit = formatter.scale_values(max, &mut dummy);
@@ -1306,7 +1306,7 @@ impl<B: PlottingBackend> Plotter for PlotGenerator<B> {
         for (id, bench) in all_curves {
             function_id_to_benchmarks
                 .entry(&id.function_id)
-                .or_insert(Vec::new())
+                .or_insert_with(Vec::new)
                 .push((*id, *bench))
         }
 
@@ -1332,7 +1332,7 @@ impl<B: PlottingBackend> Plotter for PlotGenerator<B> {
 
         let lines: Vec<_> = series_data
             .iter()
-            .map(|(name, xs, ys)| (*name, LineCurve { xs: &*xs, ys: &*ys }))
+            .map(|(name, xs, ys)| (*name, LineCurve { xs, ys }))
             .collect();
 
         self.backend.line_comparison(
@@ -1392,7 +1392,7 @@ impl<B: PlottingBackend> Plotter for PlotGenerator<B> {
 
         let lines = kdes
             .iter()
-            .map(|(name, xs, ys)| (*name, LineCurve { xs: &*xs, ys: &*ys }))
+            .map(|(name, xs, ys)| (*name, LineCurve { xs, ys }))
             .collect::<Vec<_>>();
 
         self.backend.violin(

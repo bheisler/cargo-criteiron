@@ -189,7 +189,7 @@ pub struct FullConfig {
 /// Call `cargo criterion` and parse the output to get the path to the target directory.
 fn get_target_directory_from_metadata() -> Result<PathBuf> {
     let out = Command::new("cargo")
-        .args(&["metadata", "--format-version", "1"])
+        .args(["metadata", "--format-version", "1"])
         .output()?;
 
     #[derive(Deserialize)]

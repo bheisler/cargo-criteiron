@@ -82,7 +82,7 @@ pub fn compile(debug_build: bool, cargo_args: &[std::ffi::OsString]) -> Result<C
     let mut cargo = Command::new("cargo")
         .args(subcommand)
         .args(cargo_args)
-        .args(&["--no-run", "--message-format", "json-render-diagnostics"])
+        .args(["--no-run", "--message-format", "json-render-diagnostics"])
         .stdin(Stdio::null())
         .stderr(Stdio::inherit()) // Cargo writes its normal compile output to stderr
         .stdout(Stdio::piped()) // Capture the JSON messages on stdout

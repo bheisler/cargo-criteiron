@@ -42,7 +42,7 @@ pub fn t_test(
         .draw_series(AreaSeries::new(
             t_distribution.to_points(),
             0.0,
-            &colors.current_sample.mix(0.25),
+            colors.current_sample.mix(0.25),
         ))
         .unwrap()
         .label("t distribution")
@@ -60,7 +60,7 @@ pub fn t_test(
         )))
         .unwrap()
         .label("t statistic")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &colors.current_sample));
+        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], colors.current_sample));
 
     chart.configure_series_labels().draw().unwrap();
 }

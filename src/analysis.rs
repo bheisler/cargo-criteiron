@@ -74,7 +74,7 @@ pub(crate) fn analysis<'a>(
     };
 
     MeasurementData {
-        data: Data::new(&*iters, &*values),
+        data: Data::new(iters, values),
         avg_times: labeled_sample,
         absolute_estimates: estimates,
         distributions,

@@ -246,7 +246,7 @@ impl BenchTarget {
                     let avg_values: Vec<f64> = iters
                         .iter()
                         .zip(times.iter())
-                        .map(|(iter, time)| *time / (*iter as f64))
+                        .map(|(iter, time)| *time / *iter)
                         .collect();
 
                     if times.iter().any(|&f| f == 0.0) {
