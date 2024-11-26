@@ -45,6 +45,8 @@ Then you can use it to run your Criterion-rs benchmarks:
 
 `cargo criterion`
 
+Generated reports will appear in `target/criterion/reports`.
+
 ### Goals
 
 - cargo-criterion seeks to improve iteration time for Criterion-rs benchmarks. By moving functionality into a separate executable which can be installed once and reused, Criterion-rs can shrink - meaning less code to compile and link into the benchmarks themselves.
